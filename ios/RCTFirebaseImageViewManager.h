@@ -8,8 +8,6 @@
 
 #import <React/RCTViewManager.h>
 
-@interface RCTFirebaseImageView : RCTViewManager
-
-@property (nonatomic, copy) NSString *path;
+@interface RCTFirebaseImageViewManager : RCTViewManager
 
 @end

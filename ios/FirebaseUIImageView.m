@@ -1,28 +1,17 @@
 //
-//  RNFirebaseImage.m
+//  FirebaseUIImageView.h
 //  RNFirebaseUi
 //
-//  Created by erez rokah on 7/11/17.
+//  Created by erez on 7/11/17.
 //  Copyright © 2017 Rumors. All rights reserved.
 //
 
 
-#import "RNFirebaseImage.h"
+#import "FirebaseUIImageView.h"
 #import "Firebase.h"
 #import <FirebaseStorageUI/FirebaseStorageUI.h>
 
-@implementation RCTFirebaseImageView
-
-RCT_EXPORT_MODULE()
-
-UIImageView *_imageView;
-
-- (UIView *)view
-{
-    _imageView = [[UIImageView alloc] init];
-    
-    return _imageView;
-}
+@implementation FirebaseImageView
 
 - (void)setPath:(NSString *)path
 {
@@ -35,7 +24,7 @@ UIImageView *_imageView;
     UIImage *placeholderImage;
     
     // Load the image using SDWebImage
-    [_imageView sd_setImageWithStorageReference:reference placeholderImage:placeholderImage];
+    [self sd_setImageWithStorageReference:reference placeholderImage:placeholderImage];
 }
 
 @end

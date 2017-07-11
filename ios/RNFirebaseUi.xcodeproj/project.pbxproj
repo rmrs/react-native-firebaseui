@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3E7B58A1CC2AC0600A0062D /* RNFirebaseImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNFirebaseImage.m */; };
+		B3E7B58A1CC2AC0600A0062D /* RCTFirebaseImageViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RCTFirebaseImageViewManager.m */; };
+		BA04DF251F1506A800122A3C /* FirebaseUIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA04DF241F1506A800122A3C /* FirebaseUIImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,8 +25,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNFirebaseUi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNFirebaseUi.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5891CC2AC0600A0062D /* RNFirebaseImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseImage.m; sourceTree = "<group>"; };
-		BA43A3101F14BB0300791965 /* RNFirebaseImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseImage.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RCTFirebaseImageViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTFirebaseImageViewManager.m; sourceTree = "<group>"; };
+		BA04DF241F1506A800122A3C /* FirebaseUIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseUIImageView.m; sourceTree = "<group>"; };
+		BA04DF261F1506CE00122A3C /* FirebaseUIImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUIImageView.h; sourceTree = "<group>"; };
+		BA43A3101F14BB0300791965 /* RCTFirebaseImageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFirebaseImageViewManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,8 +53,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				B3E7B5891CC2AC0600A0062D /* RNFirebaseImage.m */,
-				BA43A3101F14BB0300791965 /* RNFirebaseImage.h */,
+				BA04DF261F1506CE00122A3C /* FirebaseUIImageView.h */,
+				BA04DF241F1506A800122A3C /* FirebaseUIImageView.m */,
+				B3E7B5891CC2AC0600A0062D /* RCTFirebaseImageViewManager.m */,
+				BA43A3101F14BB0300791965 /* RCTFirebaseImageViewManager.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,7 +117,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* RNFirebaseImage.m in Sources */,
+				B3E7B58A1CC2AC0600A0062D /* RCTFirebaseImageViewManager.m in Sources */,
+				BA04DF251F1506A800122A3C /* FirebaseUIImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
