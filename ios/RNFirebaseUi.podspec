@@ -17,6 +17,5 @@ Pod::Spec.new do |s|
 
 
   s.dependency "React"
-  #s.dependency "others"
-
+  s.dependency 'FirebaseUI/Storage', '~> 4.0'
 end
