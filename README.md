@@ -9,7 +9,7 @@
 
 `$ react-native link react-native-firebase-ui`
 
-For iOS add the following pod to you pod file:
+For iOS add the following pod to your podfile:
 ```
 pod 'FirebaseUI/Storage'
 ```
