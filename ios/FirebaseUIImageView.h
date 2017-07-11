@@ -9,10 +9,12 @@
 #import "Firebase.h"
 #import <FirebaseStorageUI/FirebaseStorageUI.h>
 
+#import <React/RCTResizeMode.h>
 
 @interface FirebaseImageView : UIImageView
 
 @property (nonatomic, copy) NSString *path;
+@property (nonatomic, assign) RCTResizeMode resizeMode;
 
 @end
 

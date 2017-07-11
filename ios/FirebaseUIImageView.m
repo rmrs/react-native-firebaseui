@@ -27,4 +27,21 @@
     [self sd_setImageWithStorageReference:reference placeholderImage:placeholderImage];
 }
 
+- (void)setResizeMode:(RCTResizeMode)resizeMode
+{
+    if (_resizeMode != resizeMode) {
+        _resizeMode = resizeMode;
+        
+        if (_resizeMode == RCTResizeModeRepeat) {
+            // Repeat resize mode is handled by the UIImage. Use scale to fill
+            // so the repeated image fills the UIImageView.
+            self.contentMode = UIViewContentModeScaleToFill;
+        } else {
+            UIViewContentMode contentMode = (UIViewContentMode)resizeMode;
+            self.contentMode = contentMode;
+            self.clipsToBounds = true;
+        }
+    }
+}
+
 @end
