@@ -3,7 +3,7 @@
 
 ## Getting started
 
-`$ npm install react-native-firebase-ui --save`
+`$ npm install git+ssh://git@github.com/rmrs/react-native-firebaseui.git#master --save`
 
 ### Mostly automatic installation
 
