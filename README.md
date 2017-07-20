@@ -1,6 +1,11 @@
 
 # react-native-firebase-ui
 
+## Requirements
+We assume you already have firebase sdk installed and configured.
+We're using this great library:
+https://github.com/invertase/react-native-firebase
+
 ## Getting started
 
 `$ npm install git+ssh://git@github.com/rmrs/react-native-firebaseui.git#master --save`
