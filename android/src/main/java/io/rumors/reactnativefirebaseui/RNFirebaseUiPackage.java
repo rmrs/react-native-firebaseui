@@ -11,6 +11,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
 import io.rumors.reactnativefirebaseui.storage.FirebaseImageViewManager;
+import io.rumors.reactnativefirebaseui.storage.FirebasePhotoViewManager;
 
 public class RNFirebaseUiPackage implements ReactPackage {
     @Override
@@ -26,7 +27,8 @@ public class RNFirebaseUiPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
       return Arrays.<ViewManager>asList(
-        new FirebaseImageViewManager()
+        new FirebaseImageViewManager(),
+        new FirebasePhotoViewManager()
       );
     }
 }

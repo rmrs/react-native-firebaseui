@@ -39,4 +39,7 @@ dependencies {
 
     // FirebaseUI Storage only
     compile 'com.firebaseui:firebase-ui-storage:0.6.0'
+
+    //PhotoView
+    compile 'com.github.chrisbanes:PhotoView:2.1.3'
 }

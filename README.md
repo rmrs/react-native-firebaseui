@@ -20,6 +20,18 @@ pod 'FirebaseUI/Storage'
 ```
 and run pod install.
 
+## Android Additional step for PhotoView Library
+
+Add this in your root build.gradle file (usually under `android/build.gradle`):
+```
+allprojects {
+  repositories {
+    ...
+    maven { url "https://jitpack.io" }
+  }
+}
+```
+
 ### Manual installation
 
 
@@ -48,9 +60,10 @@ and run pod install.
 
 ## Usage
 ```javascript
-import Firebaseimage from 'react-native-firebaseui'
+import { ImageView, PhotoView } from 'react-native-firebaseui'
 
-export class MyFirebaseImage extends Component<void, void, void> {
+//no zoom support
+export class MyFirebaseImageView extends Component<void, void, void> {
   constructor(props){
     super(props)
   }
@@ -59,7 +72,26 @@ export class MyFirebaseImage extends Component<void, void, void> {
     let imageProps = this.props
 
     return (
-      <Firebaseimage
+      <ImageView
+        {...imageProps}
+        path='firebase/storage/path'
+        resizeMode='cover' //'cover', 'contain', 'stretch'
+      />
+    )
+  }
+}
+
+//zoom support (android only). On iOS just wrap the ImageView with a scroll view
+export class MyFirebasePhotoView extends Component<void, void, void> {
+  constructor(props){
+    super(props)
+  }
+
+  render() {
+    let imageProps = this.props
+
+    return (
+      <PhotoView
         {...imageProps}
         path='firebase/storage/path'
         resizeMode='cover' //'cover', 'contain', 'stretch'

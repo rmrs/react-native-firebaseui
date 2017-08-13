@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import { requireNativeComponent, Image } from 'react-native';
+import PropTypes from 'prop-types'
+import { requireNativeComponent, Image, Platform } from 'react-native'
 
 var iface = {
   name: 'FirebaseImage',
@@ -8,6 +8,14 @@ var iface = {
     path: PropTypes.string,
     resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch']),
   },
-};
+}
 
-module.exports = requireNativeComponent('RCTFirebaseImageView', iface);
+const ImageView = requireNativeComponent('RCTFirebaseImageView', iface)
+let PhotoView = null
+//PhotoView is supported only on android
+if (Platform.OS === 'android') {
+  PhotoView = requireNativeComponent('RCTFirebasePhotoView', iface)
+} else {
+  PhotoView = ImageView
+}
+module.exports = { ImageView, PhotoView }
