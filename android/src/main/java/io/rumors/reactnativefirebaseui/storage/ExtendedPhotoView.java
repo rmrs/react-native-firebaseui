@@ -18,10 +18,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType;
 
 public class ExtendedPhotoView extends PhotoView {
   protected String mPath = null;
-  protected Map<RoundedCornersTransformation.CornerType, Integer> mBorderRadii = null;
+  protected Map<CornerType, Integer> mBorderRadii = null;
   protected ScaleType mScaleType;
 
   protected ThemedReactContext mContext = null;
@@ -40,9 +41,9 @@ public class ExtendedPhotoView extends PhotoView {
     mScaleType = scaleType;
   }
 
-  public void setBorderRadius(int borderRadius, RoundedCornersTransformation.CornerType cornerType) {
+  public void setBorderRadius(int borderRadius, CornerType cornerType) {
     if (mBorderRadii == null ) {
-      mBorderRadii = new HashMap<RoundedCornersTransformation.CornerType, Integer>();
+      mBorderRadii = new HashMap<CornerType, Integer>();
     }
     mBorderRadii.put(cornerType, borderRadius);
   }
@@ -53,7 +54,7 @@ public class ExtendedPhotoView extends PhotoView {
 
     if (mBorderRadii != null) {
       ArrayList<Transformation> transformations = new ArrayList<>();
-      for (RoundedCornersTransformation.CornerType cornerType : mBorderRadii.keySet()) {
+      for (CornerType cornerType : mBorderRadii.keySet()) {
         transformations.add(new RoundedCornersTransformation(mContext, mBorderRadii.get(cornerType), 0, cornerType));
       }
       Transformation[] transformationsArray;
