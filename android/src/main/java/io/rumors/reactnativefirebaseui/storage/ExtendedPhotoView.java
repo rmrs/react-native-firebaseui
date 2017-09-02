@@ -1,5 +1,6 @@
 package io.rumors.reactnativefirebaseui.storage;
 
+import com.bumptech.glide.load.Transformation;
 import com.github.chrisbanes.photoview.PhotoView;
 import android.widget.ImageView.ScaleType;
 
@@ -12,12 +13,15 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 
 import com.facebook.react.uimanager.ThemedReactContext;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ExtendedPhotoView extends PhotoView {
   protected String mPath = null;
-  protected int mBorderRadius = 0;
-  protected RoundedCornersTransformation.CornerType mCornerType;
+  protected Map<RoundedCornersTransformation.CornerType, Integer> mBorderRadii = null;
   protected ScaleType mScaleType;
 
   protected ThemedReactContext mContext = null;
@@ -37,27 +41,38 @@ public class ExtendedPhotoView extends PhotoView {
   }
 
   public void setBorderRadius(int borderRadius, RoundedCornersTransformation.CornerType cornerType) {
-    mBorderRadius = borderRadius;
-    mCornerType = cornerType;
+    if (mBorderRadii == null ) {
+      mBorderRadii = new HashMap<RoundedCornersTransformation.CornerType, Integer>();
+    }
+    mBorderRadii.put(cornerType, borderRadius);
   }
 
   public void updateView() {
     StorageReference storageReference = FirebaseStorage.getInstance().getReference(mPath);
     FirebaseImageLoader imageLoader = new FirebaseImageLoader();
-    if (mBorderRadius != 0) {
-      //ctor is (context, radius, margin, cornerType)
-      RoundedCornersTransformation transformation =
-        new RoundedCornersTransformation(mContext, mBorderRadius, 0, mCornerType);
+
+    if (mBorderRadii != null) {
+      ArrayList<Transformation> transformations = new ArrayList<>();
+      for (RoundedCornersTransformation.CornerType cornerType : mBorderRadii.keySet()) {
+        transformations.add(new RoundedCornersTransformation(mContext, mBorderRadii.get(cornerType), 0, cornerType));
+      }
+      Transformation[] transformationsArray;
 
       if (mScaleType == ScaleType.CENTER_CROP) {
+        transformations.add(0, new CenterCrop(mContext));
+        transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
+
         Glide.with(mContext).using(imageLoader)
         .load(storageReference)
-        .bitmapTransform(new CenterCrop(mContext), transformation)
+        .bitmapTransform(transformationsArray)
         .into(this);
       } else {
+        transformations.add(0, new FitCenter(mContext));
+        transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
+
         Glide.with(mContext).using(imageLoader)
         .load(storageReference)
-        .bitmapTransform(new FitCenter(mContext), transformation)
+        .bitmapTransform(transformationsArray)
         .into(this);
       }
     } else {

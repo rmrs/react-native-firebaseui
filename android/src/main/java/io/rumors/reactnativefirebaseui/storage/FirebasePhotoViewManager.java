@@ -9,11 +9,11 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import com.facebook.react.uimanager.ViewProps;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.annotations.ReactPropGroup;
+
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.yoga.YogaConstants;
 import com.facebook.react.uimanager.PixelUtil;
-import com.facebook.react.uimanager.ThemedReactContext;
 
 public class FirebasePhotoViewManager extends SimpleViewManager<ExtendedPhotoView> {
   public static final String REACT_CLASS = "RCTFirebasePhotoView";
