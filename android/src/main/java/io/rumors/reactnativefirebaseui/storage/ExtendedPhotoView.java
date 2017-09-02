@@ -1,28 +1,30 @@
 package io.rumors.reactnativefirebaseui.storage;
 
-import com.bumptech.glide.load.Transformation;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.HashMap;
+import java.util.ArrayList;
+
 import com.github.chrisbanes.photoview.PhotoView;
 import android.widget.ImageView.ScaleType;
 
+import com.facebook.react.uimanager.ThemedReactContext;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 
-import com.facebook.react.uimanager.ThemedReactContext;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType;
 
+
 public class ExtendedPhotoView extends PhotoView {
   protected String mPath = null;
-  protected Map<CornerType, Integer> mBorderRadii = null;
+  protected Map<CornerType, Integer> mBorderRadii = new HashMap<CornerType, Integer>();
   protected ScaleType mScaleType;
 
   protected ThemedReactContext mContext = null;
@@ -42,9 +44,6 @@ public class ExtendedPhotoView extends PhotoView {
   }
 
   public void setBorderRadius(int borderRadius, CornerType cornerType) {
-    if (mBorderRadii == null ) {
-      mBorderRadii = new HashMap<CornerType, Integer>();
-    }
     mBorderRadii.put(cornerType, borderRadius);
   }
 
@@ -52,42 +51,25 @@ public class ExtendedPhotoView extends PhotoView {
     StorageReference storageReference = FirebaseStorage.getInstance().getReference(mPath);
     FirebaseImageLoader imageLoader = new FirebaseImageLoader();
 
-    if (mBorderRadii != null) {
-      ArrayList<Transformation> transformations = new ArrayList<>();
-      for (CornerType cornerType : mBorderRadii.keySet()) {
-        transformations.add(new RoundedCornersTransformation(mContext, mBorderRadii.get(cornerType), 0, cornerType));
-      }
-      Transformation[] transformationsArray;
+    ArrayList<Transformation> transformations = new ArrayList<Transformation>(1 + mBorderRadii.size());
 
-      if (mScaleType == ScaleType.CENTER_CROP) {
-        transformations.add(0, new CenterCrop(mContext));
-        transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
-
-        Glide.with(mContext).using(imageLoader)
-        .load(storageReference)
-        .bitmapTransform(transformationsArray)
-        .into(this);
-      } else {
-        transformations.add(0, new FitCenter(mContext));
-        transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
-
-        Glide.with(mContext).using(imageLoader)
-        .load(storageReference)
-        .bitmapTransform(transformationsArray)
-        .into(this);
-      }
+    if (mScaleType == ScaleType.CENTER_CROP) {
+      transformations.add(new CenterCrop(mContext));
     } else {
-      if (mScaleType == ScaleType.CENTER_CROP) {
-        Glide.with(mContext).using(imageLoader)
-        .load(storageReference)
-        .centerCrop()
-        .into(this);
-      } else {
-        Glide.with(mContext).using(imageLoader)
-        .load(storageReference)
-        .fitCenter()
-        .into(this);
-      }
+      transformations.add(new FitCenter(mContext));
     }
+
+    for (Entry<CornerType, Integer> entry : mBorderRadii.entrySet()) {
+      CornerType cornerType = entry.getKey();
+      Integer radius = entry.getValue();
+      transformations.add(new RoundedCornersTransformation(mContext, radius, 0, cornerType));
+    }
+
+    Transformation[] transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
+
+    Glide.with(mContext).using(imageLoader)
+            .load(storageReference)
+            .bitmapTransform(transformationsArray)
+            .into(this);
   }
 }
