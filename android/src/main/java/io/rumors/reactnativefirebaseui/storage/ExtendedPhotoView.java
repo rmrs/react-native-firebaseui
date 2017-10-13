@@ -17,7 +17,6 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.module.AppGlideModule;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
