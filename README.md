@@ -8,7 +8,7 @@ https://github.com/invertase/react-native-firebase
 
 ## Getting started
 
-`$ npm install git+ssh://git@github.com/rmrs/react-native-firebaseui.git#master --save`
+`$ npm install react-native-firebaseui --save`
 
 ### Mostly automatic installation
 
