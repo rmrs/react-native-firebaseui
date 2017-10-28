@@ -6,6 +6,7 @@ var iface = {
   propTypes: {
     ...Image.propTypes,
     path: PropTypes.string,
+    timestamp: PropTypes.number,
     resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch']),
   },
 }

@@ -32,6 +32,11 @@ public class FirebaseImageViewManager extends SimpleViewManager<ExtendedImageVie
     imageView.setPath(path);
   }
 
+  @ReactProp(name = "timestamp")
+  public void setTimestamp(ExtendedImageView imageView, @Nullable double timestamp) {
+    imageView.setTimestamp((long)timestamp);
+  }
+
   @ReactProp(name = ViewProps.RESIZE_MODE)
   public void setResizeMode(ExtendedImageView imageView, @Nullable String resizeMode) {
     ScaleType scaleType = ScaleType.CENTER_INSIDE;

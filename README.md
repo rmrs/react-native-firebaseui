@@ -16,7 +16,7 @@ https://github.com/invertase/react-native-firebase
 
 For iOS add the following pod to your podfile:
 ```
-pod 'FirebaseUI/Storage'
+pod 'SDWebImage', '~> 4.0'
 ```
 and run pod install.
 
@@ -75,6 +75,7 @@ export class MyFirebaseImageView extends Component<void, void, void> {
       <ImageView
         {...imageProps}
         path='firebase/storage/path'
+        timestamp={0} //optional, can be used to specify last modified time for same storage path
         resizeMode='cover' //'cover', 'contain', 'stretch'
       />
     )
@@ -94,6 +95,7 @@ export class MyFirebasePhotoView extends Component<void, void, void> {
       <PhotoView
         {...imageProps}
         path='firebase/storage/path'
+        timestamp={0} //optional, can be used to specify last modified time for same storage path
         resizeMode='cover' //'cover', 'contain', 'stretch'
       />
     )
