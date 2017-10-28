@@ -17,6 +17,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.signature.MediaStoreSignature;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -27,6 +28,7 @@ public class ExtendedPhotoView extends PhotoView {
   protected String mPath = null;
   protected Map<CornerType, Integer> mBorderRadii = new HashMap<CornerType, Integer>();
   protected ScaleType mScaleType;
+  protected long mTimestamp = 0;
 
   protected ThemedReactContext mContext = null;
 
@@ -37,6 +39,10 @@ public class ExtendedPhotoView extends PhotoView {
 
   public void setPath(String path) {
     mPath = path;
+  }
+
+  public void setTimestamp(long timestamp) {
+    mTimestamp = timestamp;
   }
 
   @Override
@@ -72,6 +78,8 @@ public class ExtendedPhotoView extends PhotoView {
     GlideApp.with(mContext)
             .load(storageReference)
             .apply(bitmapTransform(multi))
+            //(String mimeType, long dateModified, int orientation)
+            .signature(new MediaStoreSignature("", mTimestamp, 0))
             .into(this);
   }
 }
