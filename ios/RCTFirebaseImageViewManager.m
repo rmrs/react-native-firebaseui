@@ -14,12 +14,14 @@
 
 RCT_EXPORT_MODULE()
 RCT_EXPORT_VIEW_PROPERTY(path, NSString)
+RCT_EXPORT_VIEW_PROPERTY(timestamp, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(resizeMode, RCTResizeMode)
+
 
 - (UIView *)view
 {
     FirebaseImageView *imageView = [[FirebaseImageView alloc] init];
-    
+
     return imageView;
 }
 

@@ -9,29 +9,28 @@
 
 #import "FirebaseUIImageView.h"
 #import "Firebase.h"
-#import <FirebaseStorageUI/FirebaseStorageUI.h>
+#import "UIImageView+FirebaseStorage.h"
 
 @implementation FirebaseImageView
 
 - (void)setPath:(NSString *)path
 {
     _path = path;
-    
-    // Reference to an image file in Firebase Storage
-    FIRStorageReference *reference = [[FIRStorage storage] referenceWithPath:_path];
-    
-    // Placeholder image
-    UIImage *placeholderImage;
-    
-    // Load the image using SDWebImage
-    [self sd_setImageWithStorageReference:reference placeholderImage:placeholderImage];
+
+    [self reloadImage];
+}
+
+-(void)setTimestamp:(NSNumber*)timestamp
+{
+    _timestamp = timestamp;
+    [self reloadImage];
 }
 
 - (void)setResizeMode:(RCTResizeMode)resizeMode
 {
     if (_resizeMode != resizeMode) {
         _resizeMode = resizeMode;
-        
+
         if (_resizeMode == RCTResizeModeRepeat) {
             // Repeat resize mode is handled by the UIImage. Use scale to fill
             // so the repeated image fills the UIImageView.
@@ -42,6 +41,16 @@
             self.clipsToBounds = true;
         }
     }
+}
+
+-(void)reloadImage
+{
+    // Reference to an image file in Firebase Storage
+    FIRStorageReference *reference = [[FIRStorage storage] referenceWithPath:_path];
+
+    // Load the image using SDWebImage
+    NSString* timestamp = [_timestamp stringValue];
+    [self sd_setImageWithStorageReference:reference customKey:timestamp];
 }
 
 @end

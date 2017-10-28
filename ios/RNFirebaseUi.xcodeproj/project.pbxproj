@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* RCTFirebaseImageViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RCTFirebaseImageViewManager.m */; };
 		BA04DF251F1506A800122A3C /* FirebaseUIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA04DF241F1506A800122A3C /* FirebaseUIImageView.m */; };
+		BAC95E541FA3D2C400E33F4D /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC95E511FA3D2C300E33F4D /* UIImageView+FirebaseStorage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,8 @@
 		BA04DF241F1506A800122A3C /* FirebaseUIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseUIImageView.m; sourceTree = "<group>"; };
 		BA04DF261F1506CE00122A3C /* FirebaseUIImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUIImageView.h; sourceTree = "<group>"; };
 		BA43A3101F14BB0300791965 /* RCTFirebaseImageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFirebaseImageViewManager.h; sourceTree = "<group>"; };
+		BAC95E511FA3D2C300E33F4D /* UIImageView+FirebaseStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FirebaseStorage.m"; sourceTree = "<group>"; };
+		BAC95E531FA3D2C300E33F4D /* UIImageView+FirebaseStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FirebaseStorage.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +56,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				BAC95E531FA3D2C300E33F4D /* UIImageView+FirebaseStorage.h */,
+				BAC95E511FA3D2C300E33F4D /* UIImageView+FirebaseStorage.m */,
 				BA04DF261F1506CE00122A3C /* FirebaseUIImageView.h */,
 				BA04DF241F1506A800122A3C /* FirebaseUIImageView.m */,
 				B3E7B5891CC2AC0600A0062D /* RCTFirebaseImageViewManager.m */,
@@ -119,6 +124,7 @@
 			files = (
 				B3E7B58A1CC2AC0600A0062D /* RCTFirebaseImageViewManager.m in Sources */,
 				BA04DF251F1506A800122A3C /* FirebaseUIImageView.m in Sources */,
+				BAC95E541FA3D2C400E33F4D /* UIImageView+FirebaseStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
