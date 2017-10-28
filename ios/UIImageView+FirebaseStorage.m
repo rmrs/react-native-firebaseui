@@ -117,7 +117,12 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
   self.image = placeholder;
 
   // Query cache for image before trying to download
-  NSString *key = [storageRef.fullPath stringByAppendingString:customKey];
+  NSString *key = nil;
+  if (customKey != nil) {
+    key = [storageRef.fullPath stringByAppendingString:customKey];
+  } else {
+    key = storageRef.fullPath;
+  }
   UIImage *cached = nil;
 
   cached = [cache imageFromMemoryCacheForKey:key];
@@ -148,7 +153,7 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
         self.image = image;
 
         // Cache downloaded image
-        [cache storeImage:image forKey:storageRef.fullPath completion:nil];
+        [cache storeImage:image forKey:key completion:nil];
 
         if (completion != nil) {
           completion(image, nil, SDImageCacheTypeNone, storageRef);

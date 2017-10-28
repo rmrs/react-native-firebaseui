@@ -12,18 +12,22 @@
 #import "UIImageView+FirebaseStorage.h"
 
 @implementation FirebaseImageView
+{
+    BOOL _needsReload;
+}
 
 - (void)setPath:(NSString *)path
 {
     _path = path;
 
-    [self reloadImage];
+    _needsReload = YES;
 }
 
 -(void)setTimestamp:(NSNumber*)timestamp
 {
     _timestamp = timestamp;
-    [self reloadImage];
+
+    _needsReload = YES;
 }
 
 - (void)setResizeMode:(RCTResizeMode)resizeMode
@@ -43,8 +47,16 @@
     }
 }
 
+- (void)didSetProps:(NSArray<NSString *> *)changedProps
+{
+    if (_needsReload) {
+        [self reloadImage];
+    }
+}
+
 -(void)reloadImage
 {
+    _needsReload = NO;
     // Reference to an image file in Firebase Storage
     FIRStorageReference *reference = [[FIRStorage storage] referenceWithPath:_path];
 
