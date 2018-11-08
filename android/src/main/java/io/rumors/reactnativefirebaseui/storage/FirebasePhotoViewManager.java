@@ -34,7 +34,7 @@ public class FirebasePhotoViewManager extends SimpleViewManager<ExtendedPhotoVie
   }
 
   @ReactProp(name = "timestamp")
-  public void setTimestamp(ExtendedImageView imageView, @Nullable double timestamp) {
+  public void setTimestamp(ExtendedPhotoView imageView, @Nullable double timestamp) {
     imageView.setTimestamp((long)timestamp);
   }
 
