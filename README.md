@@ -1,5 +1,5 @@
 
-# react-native-firebase-ui
+# react-native-firebaseui
 
 ## Requirements
 We assume you already have firebase sdk installed and configured.
@@ -12,7 +12,7 @@ https://github.com/invertase/react-native-firebase
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-firebase-ui`
+`$ react-native link react-native-firebaseui`
 
 For iOS add the following pod to your podfile:
 ```
