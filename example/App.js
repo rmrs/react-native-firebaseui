@@ -38,8 +38,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>        
-        <MyFirebaseImageView />
-        <MyFirebasePhotoView />
+        <MyFirebaseImageView style={styles.image} />
+        <MyFirebasePhotoView style={styles.image} />
       </View>
     )
   }
@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },  
+  },
+  image: {
+    width: 100,
+    height: 100
+  }
 });
