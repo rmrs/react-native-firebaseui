@@ -154,6 +154,7 @@ android {
 }
 
 dependencies {
+  implementation project(':react-native-firebaseui')
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation fileTree(dir: "libs", include: ["*.jar"])

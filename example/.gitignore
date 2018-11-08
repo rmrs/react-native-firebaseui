@@ -65,3 +65,7 @@ buck-out/
 # RNFirebaseStarter
 yarn.lock
 package-lock.json
+
+# config files
+
+google-services.json
