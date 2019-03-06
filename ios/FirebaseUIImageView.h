@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rumors. All rights reserved.
 //
 
-#import "Firebase.h"
+#import <FirebaseStorage/FirebaseStorage.h>
 
 #import <React/RCTResizeMode.h>
 

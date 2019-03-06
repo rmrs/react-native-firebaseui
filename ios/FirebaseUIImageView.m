@@ -8,7 +8,7 @@
 
 
 #import "FirebaseUIImageView.h"
-#import "Firebase.h"
+#import <FirebaseStorage/FirebaseStorage.h>
 #import "UIImageView+FirebaseStorage.h"
 
 @implementation FirebaseImageView
