@@ -63,5 +63,5 @@ google-services.json
 GoogleService-Info.plist
 
 # RNFirebaseStarter
-yarn.lock
+# yarn.lock
 package-lock.json
