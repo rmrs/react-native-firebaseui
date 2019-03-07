@@ -19,5 +19,9 @@
   "homepage": "https://github.com/rmrs/react-native-firebaseui#readme",
   "dependencies": {
     "prop-types": "^15.5.10"
+  },
+  "scripts": {    
+    "tag": "git tag \"v$npm_package_version\" && git push --tags",
+    "prepublishOnly": "yarn run tag"
   }
 }
