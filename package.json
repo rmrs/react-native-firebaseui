@@ -1,6 +1,6 @@
 {
   "name": "react-native-firebaseui",
-  "version": "v0.0.1-alpha8",
+  "version": "v0.1.0",
   "description": "React Native Firebase Bindings Based on FirebaseUI SDK",
   "main": "index.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/rmrs/react-native-firebaseui.git"
   },
   "keywords": ["react-native"],
-  "author": "Erez Rokah <erez@rumors.io>",
+  "author": "Erez Rokah <erezrokah@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
     "react-native": ">=0.40"
