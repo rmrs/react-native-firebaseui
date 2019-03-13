@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSString *path;
 @property (nonatomic, strong) NSNumber *timestamp;
 @property (nonatomic, assign) RCTResizeMode resizeMode;
+@property (nonatomic, strong) UIImage *defaultSource;
 
 @end

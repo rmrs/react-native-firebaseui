@@ -60,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   could not be found in cache).
  */
 - (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                                                    placeholderImage:(nullable UIImage *)placeholder
                                                     customKey:(NSString*)customKey;
 
 /**
