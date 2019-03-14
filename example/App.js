@@ -11,6 +11,7 @@ class MyFirebaseImageView extends Component {
       <ImageView
         {...imageProps}
         path='images/firebase_logo.png'
+        defaultSource={require('./assets/placeholder.png')}
         timestamp={1000} //optional, can be used to specify last modified time for same storage path
         resizeMode='cover' //'cover', 'contain', 'stretch'
       />
@@ -27,6 +28,7 @@ class MyFirebasePhotoView extends Component {
       <PhotoView
         {...imageProps}
         path='images/firebase_logo.png'
+        defaultSource={require('./assets/placeholder.png')}
         timestamp={1000} //optional, can be used to specify last modified time for same storage path
         resizeMode='cover' //'cover', 'contain', 'stretch'
       />
