@@ -32,6 +32,11 @@ public class FirebaseImageViewManager extends SimpleViewManager<ExtendedImageVie
     imageView.setPath(path);
   }
 
+  @ReactProp(name = "defaultSource")
+  public void setDefaultSource(ExtendedImageView imageView, @Nullable String source) {
+    imageView.setDefaultSource(source);
+  }
+
   @ReactProp(name = "timestamp")
   public void setTimestamp(ExtendedImageView imageView, @Nullable double timestamp) {
     imageView.setTimestamp((long)timestamp);
