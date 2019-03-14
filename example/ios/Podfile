@@ -5,6 +5,14 @@ target 'ReactNativeFirebaseUIExample' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
+  # The following line hard selects GoogleUtilities 5.3.7
+  # This line should probably be removed in the future but
+  # fixes a linker problem on iOS, due to the fact that if
+  # we ommit this line, then 5.4.0 gets installed, which
+  # causes a link error.
+  pod 'GoogleUtilities', '~> 5.3.7'
+
+
   # Pods for ReactNativeFirebaseUIExample
 
   # Required by RNFirebase
