@@ -1,5 +1,5 @@
 // On Android, both Image and Photo view are supported,
-// and defaultSource is converted to an uri that the
+// and defaultSource is converted to a uri that the
 // native side can interpret
 import React, { Component } from 'react'
 import { requireNativeComponent, Image, Platform } from 'react-native'
