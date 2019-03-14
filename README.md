@@ -75,6 +75,7 @@ export class MyFirebaseImageView extends Component<void, void, void> {
       <ImageView
         {...imageProps}
         path='firebase/storage/path'
+        defaultSource={require('./placeholder.png')} // optional, show placeholder until image is loaded
         timestamp={0} //optional, can be used to specify last modified time for same storage path
         resizeMode='cover' //'cover', 'contain', 'stretch'
       />
@@ -95,6 +96,7 @@ export class MyFirebasePhotoView extends Component<void, void, void> {
       <PhotoView
         {...imageProps}
         path='firebase/storage/path'
+        defaultSource={require('./placeholder.png')} // optional, show placeholder until image is loaded
         timestamp={0} //optional, can be used to specify last modified time for same storage path
         resizeMode='cover' //'cover', 'contain', 'stretch'
       />
@@ -102,3 +104,5 @@ export class MyFirebasePhotoView extends Component<void, void, void> {
   }
 }
 ```
+
+> Note: On Android, the `defaultSource` prop is ignored on debug builds.

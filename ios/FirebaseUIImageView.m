@@ -19,14 +19,21 @@
 - (void)setPath:(NSString *)path
 {
     _path = path;
+    
+    _needsReload = YES;
+}
 
+- (void)setDefaultSource:(UIImage *)defaultSource
+{
+    _defaultSource = defaultSource;
+    
     _needsReload = YES;
 }
 
 -(void)setTimestamp:(NSNumber*)timestamp
 {
     _timestamp = timestamp;
-
+    
     _needsReload = YES;
 }
 
@@ -34,7 +41,7 @@
 {
     if (_resizeMode != resizeMode) {
         _resizeMode = resizeMode;
-
+        
         if (_resizeMode == RCTResizeModeRepeat) {
             // Repeat resize mode is handled by the UIImage. Use scale to fill
             // so the repeated image fills the UIImageView.
@@ -59,10 +66,10 @@
     _needsReload = NO;
     // Reference to an image file in Firebase Storage
     FIRStorageReference *reference = [[FIRStorage storage] referenceWithPath:_path];
-
+    
     // Load the image using SDWebImage
     NSString* timestamp = [_timestamp stringValue];
-    [self sd_setImageWithStorageReference:reference customKey:timestamp];
+    [self sd_setImageWithStorageReference:reference placeholderImage:_defaultSource customKey:timestamp];
 }
 
 @end

@@ -5,10 +5,14 @@ import java.util.Map.Entry;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+import javax.annotation.Nullable;
+
 import com.github.chrisbanes.photoview.PhotoView;
 import android.widget.ImageView.ScaleType;
+import android.graphics.drawable.Drawable;
 
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.views.imagehelper.ResourceDrawableIdHelper;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FirebaseStorage;
@@ -26,6 +30,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType
 
 public class ExtendedPhotoView extends PhotoView {
   protected String mPath = null;
+  protected @Nullable Drawable mDefaultImageDrawable;
   protected Map<CornerType, Integer> mBorderRadii = new HashMap<CornerType, Integer>();
   protected ScaleType mScaleType;
   protected long mTimestamp = 0;
@@ -39,6 +44,10 @@ public class ExtendedPhotoView extends PhotoView {
 
   public void setPath(String path) {
     mPath = path;
+  }
+
+  public void setDefaultSource(String name) {
+    mDefaultImageDrawable = ResourceDrawableIdHelper.getInstance().getResourceDrawable(getContext(), name);
   }
 
   public void setTimestamp(long timestamp) {
@@ -77,6 +86,7 @@ public class ExtendedPhotoView extends PhotoView {
 
     GlideApp.with(mContext)
             .load(storageReference)
+            .placeholder(mDefaultImageDrawable)
             .apply(bitmapTransform(multi))
             //(String mimeType, long dateModified, int orientation)
             .signature(new MediaStoreSignature("", mTimestamp, 0))

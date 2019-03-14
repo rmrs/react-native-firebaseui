@@ -39,10 +39,11 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
 }
 
 - (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                                           placeholderImage:(nullable UIImage *)placeholder
                                            customKey:(NSString*)customKey {
   return [self sd_setImageWithStorageReference:storageRef
                                   maxImageSize:[UIImageView sd_defaultMaxImageSize]
-                              placeholderImage:nil
+                              placeholderImage:placeholder
                                          cache:[SDImageCache sharedImageCache]
                                     completion:nil
                                     customKey:customKey];
