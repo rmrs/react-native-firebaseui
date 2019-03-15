@@ -22,7 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.signature.MediaStoreSignature;
-import com.bumptech.glide.request.RequestOptions;
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType;
@@ -85,12 +85,12 @@ public class ExtendedImageView extends ImageView {
 
     MultiTransformation multi = new MultiTransformation<>(transformationsArray);
 
-    Glide .with(mContext)
+    GlideApp.with(mContext)
             .load(storageReference)
-            .apply(new RequestOptions().placeholder(mDefaultImageDrawable))
-            .apply(new RequestOptions().bitmapTransform(multi))
+            .placeholder(mDefaultImageDrawable)
+            .apply(bitmapTransform(multi))
             //(String mimeType, long dateModified, int orientation)
-            .apply(new RequestOptions().signature(new MediaStoreSignature("", mTimestamp, 0)))
+            .signature(new MediaStoreSignature("", mTimestamp, 0))
             .into(this);
   }
 }
