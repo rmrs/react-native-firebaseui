@@ -22,6 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.signature.MediaStoreSignature;
+import com.bumptech.glide.request.RequestOptions;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -63,32 +64,69 @@ public class ExtendedImageView extends ImageView {
     mBorderRadii.put(cornerType, borderRadius);
   }
 
+  static Integer getCommonBorderRadii(Map<CornerType, Integer> borderRadii) {
+    int borderRadiiCount = 0;
+    Integer borderRadius = 0;
+    for (Entry<CornerType, Integer> entry : borderRadii.entrySet()) {
+      CornerType cornerType = entry.getKey();
+      Integer radius = entry.getValue();
+      if (borderRadiiCount == 0) {
+        borderRadius = radius;
+      } else if (radius != borderRadius) {
+        return -1; // not the same
+      }
+      borderRadiiCount += (cornerType == RoundedCornersTransformation.CornerType.ALL) ? 4 : 1;
+    }
+    return ((borderRadiiCount == 0) || (borderRadiiCount >= 4)) ? borderRadius : -1;
+  }
+
   public void updateView() {
     StorageReference storageReference = FirebaseStorage.getInstance().getReference(mPath);
     FirebaseImageLoader imageLoader = new FirebaseImageLoader();
 
-    ArrayList<Transformation> transformations = new ArrayList<Transformation>(1 + mBorderRadii.size());
+    // When the border-radii are not all the same, apply the 
+    // rounded corner transformation directly on top of the 
+    // scaled bitmap.
+    RequestOptions transform;
+    if (ExtendedImageView.getCommonBorderRadii(mBorderRadii) < 0) {
+      ArrayList<Transformation> transformations = new ArrayList<Transformation>(1 + mBorderRadii.size());
 
-    if (mScaleType == ScaleType.CENTER_CROP) {
-      transformations.add(new CenterCrop());
-    } else {
-      transformations.add(new FitCenter());
+      if (mScaleType == ScaleType.CENTER_CROP) {
+        transformations.add(new CenterCrop());
+      } else {
+        transformations.add(new FitCenter());
+      }
+
+      for (Entry<CornerType, Integer> entry : mBorderRadii.entrySet()) {
+        CornerType cornerType = entry.getKey();
+        Integer radius = entry.getValue();
+        transformations.add(new RoundedCornersTransformation(radius, 0, cornerType));
+      }
+
+      Transformation[] transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
+
+      MultiTransformation multi = new MultiTransformation<>(transformationsArray);
+      transform = bitmapTransform(multi);
     }
 
-    for (Entry<CornerType, Integer> entry : mBorderRadii.entrySet()) {
-      CornerType cornerType = entry.getKey();
-      Integer radius = entry.getValue();
-      transformations.add(new RoundedCornersTransformation(radius, 0, cornerType));
+    // When all border-radii are the same (or none are set)
+    // then let the ImageView apply the scale-type. This causes the 
+    // underlying BitmapDrawable to use the original bitmap and makes
+    // it possible to do shared element transitions on this view.
+    else {
+      transform = null;
+      super.setScaleType(mScaleType);
     }
 
-    Transformation[] transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
-
-    MultiTransformation multi = new MultiTransformation<>(transformationsArray);
-
-    GlideApp.with(mContext)
+    GlideRequest request = GlideApp.with(mContext)
             .load(storageReference)
-            .placeholder(mDefaultImageDrawable)
-            .apply(bitmapTransform(multi))
+            .placeholder(mDefaultImageDrawable);
+    if (transform != null) {
+      request = request.apply(transform);
+    } else {
+      request = request.dontTransform();
+    }
+    request
             //(String mimeType, long dateModified, int orientation)
             .signature(new MediaStoreSignature("", mTimestamp, 0))
             .into(this);
