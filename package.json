@@ -1,6 +1,6 @@
 {
   "name": "react-native-firebaseui",
-  "version": "v0.1.2",
+  "version": "0.1.2",
   "description": "React Native Firebase Bindings Based on FirebaseUI SDK",
   "main": "index.js",
   "repository": {
