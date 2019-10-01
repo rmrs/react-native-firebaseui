@@ -17,8 +17,7 @@
 @import UIKit;
 #import <UIKit/UIKit.h>
 #import <FirebaseStorage/FirebaseStorage.h>
-#import <SDWebImage/UIImageView+WebCache.h>
-#import <SDWebImage/UIImage+MultiFormat.h>
+#import <SDWebImage/SDWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
