@@ -1,38 +1,77 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'ReactNativeFirebaseUIExample' do
+  # Pods for ReactNativeFirebaseUIExample
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  # The following line hard selects GoogleUtilities 5.3.7
-  # This line should probably be removed in the future but
-  # fixes a linker problem on iOS, due to the fact that if
-  # we ommit this line, then 5.4.0 gets installed, which
-  # causes a link error.
-  pod 'GoogleUtilities', '~> 5.3.7'
-
-
-  # Pods for ReactNativeFirebaseUIExample
+  # Pods for RN-firebase-starter
+  pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
+  pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
+  pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
+  pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
+  pod 'React', :path => '../node_modules/react-native/'
+  pod 'React-Core', :path => '../node_modules/react-native/'
+  pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
+  pod 'React-Core/DevSupport', :path => '../node_modules/react-native/'
+  pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
+  pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
+  pod 'React-RCTBlob', :path => '../node_modules/react-native/Libraries/Blob'
+  pod 'React-RCTImage', :path => '../node_modules/react-native/Libraries/Image'
+  pod 'React-RCTLinking', :path => '../node_modules/react-native/Libraries/LinkingIOS'
+  pod 'React-RCTNetwork', :path => '../node_modules/react-native/Libraries/Network'
+  pod 'React-RCTSettings', :path => '../node_modules/react-native/Libraries/Settings'
+  pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
+  pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
+  pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
+  pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
+  pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
+  pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
+  pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
+  pod 'ReactCommon/jscallinvoker', :path => "../node_modules/react-native/ReactCommon"
+  pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
+  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # Required by RNFirebase
-  pod 'Firebase/Core', '~> 5.15.0'
+  pod 'Firebase/Core', '~> 6.8.1'
 
   # [OPTIONAL PODS] - comment out pods for firebase products you won't be using.
-  pod 'Firebase/AdMob', '~> 5.15.0'
-  pod 'Firebase/Auth', '~> 5.15.0'
-  pod 'Firebase/Core', '~> 5.15.0'
-  pod 'Firebase/Database', '~> 5.15.0'
-  pod 'Firebase/Functions', '~> 5.15.0'
-  pod 'Firebase/DynamicLinks', '~> 5.15.0'
-  pod 'Firebase/Firestore', '~> 5.15.0'
-  # pod 'Firebase/Invites', '~> 5.15.0'
-  pod 'Firebase/Messaging', '~> 5.15.0'
-  pod 'Firebase/RemoteConfig', '~> 5.15.0'
-  pod 'Firebase/Storage', '~> 5.15.0'
-  pod 'Firebase/Performance', '~> 5.15.0'
-  pod 'Fabric', '~> 1.7.13'
-  pod 'Crashlytics', '~> 3.10.9'
+  pod 'Firebase/AdMob', '~> 6.8.1'
+  pod 'Firebase/Auth', '~> 6.8.1'
+  pod 'Firebase/Database', '~> 6.8.1'
+  pod 'Firebase/Functions', '~> 6.8.1'
+  pod 'Firebase/DynamicLinks', '~> 6.8.1'
+  pod 'Firebase/Firestore', '~> 6.8.1'
+  pod 'Firebase/Messaging', '~> 6.8.1'
+  pod 'Firebase/RemoteConfig', '~> 6.8.1'
+  pod 'Firebase/Storage', '~> 6.8.1'
+  pod 'Firebase/Performance', '~> 6.8.1'
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
 
-  pod 'SDWebImage', '~> 4.0'
+  target 'ReactNativeFirebaseUIExampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  use_native_modules!
+
+end
+
+target 'ReactNativeFirebaseUIExample-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for ReactNativeFirebaseUIExample-tvOS
+
+  target 'ReactNativeFirebaseUIExample-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
 end
