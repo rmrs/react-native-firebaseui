@@ -1,39 +1,20 @@
 package io.rumors.reactnativefirebaseui.storage;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.HashMap;
-import java.util.ArrayList;
-
 import javax.annotation.Nullable;
 
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.graphics.drawable.Drawable;
 
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.views.imagehelper.ResourceDrawableIdHelper;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.resource.bitmap.FitCenter;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.signature.MediaStoreSignature;
-import com.bumptech.glide.request.RequestOptions;
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType;
-
 
 public class ExtendedImageView extends ImageView {
   protected String mPath = null;
   protected @Nullable Drawable mDefaultImageDrawable;
-  protected Map<CornerType, Integer> mBorderRadii = new HashMap<CornerType, Integer>();
-  protected ScaleType mScaleType;
   protected long mTimestamp = 0;
 
   protected ThemedReactContext mContext = null;
@@ -55,78 +36,12 @@ public class ExtendedImageView extends ImageView {
     mTimestamp = timestamp;
   }
 
-  @Override
-  public void setScaleType(ScaleType scaleType) {
-    mScaleType = scaleType;
-  }
-
-  public void setBorderRadius(int borderRadius, CornerType cornerType) {
-    mBorderRadii.put(cornerType, borderRadius);
-  }
-
-  static Integer getCommonBorderRadii(Map<CornerType, Integer> borderRadii) {
-    int borderRadiiCount = 0;
-    Integer borderRadius = 0;
-    for (Entry<CornerType, Integer> entry : borderRadii.entrySet()) {
-      CornerType cornerType = entry.getKey();
-      Integer radius = entry.getValue();
-      if (borderRadiiCount == 0) {
-        borderRadius = radius;
-      } else if (radius != borderRadius) {
-        return -1; // not the same
-      }
-      borderRadiiCount += (cornerType == RoundedCornersTransformation.CornerType.ALL) ? 4 : 1;
-    }
-    return ((borderRadiiCount == 0) || (borderRadiiCount >= 4)) ? borderRadius : -1;
-  }
-
   public void updateView() {
     StorageReference storageReference = FirebaseStorage.getInstance().getReference(mPath);
-    FirebaseImageLoader imageLoader = new FirebaseImageLoader();
-
-    // When the border-radii are not all the same, apply the 
-    // rounded corner transformation directly on top of the 
-    // scaled bitmap.
-    RequestOptions transform;
-    if (ExtendedImageView.getCommonBorderRadii(mBorderRadii) < 0) {
-      ArrayList<Transformation> transformations = new ArrayList<Transformation>(1 + mBorderRadii.size());
-
-      if (mScaleType == ScaleType.CENTER_CROP) {
-        transformations.add(new CenterCrop());
-      } else {
-        transformations.add(new FitCenter());
-      }
-
-      for (Entry<CornerType, Integer> entry : mBorderRadii.entrySet()) {
-        CornerType cornerType = entry.getKey();
-        Integer radius = entry.getValue();
-        transformations.add(new RoundedCornersTransformation(radius, 0, cornerType));
-      }
-
-      Transformation[] transformationsArray = transformations.toArray(new Transformation[transformations.size()]);
-
-      MultiTransformation multi = new MultiTransformation<>(transformationsArray);
-      transform = bitmapTransform(multi);
-    }
-
-    // When all border-radii are the same (or none are set)
-    // then let the ImageView apply the scale-type. This causes the 
-    // underlying BitmapDrawable to use the original bitmap and makes
-    // it possible to do shared element transitions on this view.
-    else {
-      transform = null;
-      super.setScaleType(mScaleType);
-    }
-
-    GlideRequest request = GlideApp.with(mContext)
+    GlideApp.with(mContext)
             .load(storageReference)
-            .placeholder(mDefaultImageDrawable);
-    if (transform != null) {
-      request = request.apply(transform);
-    } else {
-      request = request.dontTransform();
-    }
-    request
+            .placeholder(mDefaultImageDrawable)
+            .dontTransform()
             //(String mimeType, long dateModified, int orientation)
             .signature(new MediaStoreSignature("", mTimestamp, 0))
             .into(this);
