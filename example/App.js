@@ -17,7 +17,7 @@ class MyFirebaseImageView extends Component {
         path="images/firebase_logo.png"
         defaultSource={require('./assets/placeholder.png')}
         timestamp={1000} //optional, can be used to specify last modified time for same storage path
-        resizeMode="cover" //'cover', 'contain', 'stretch'
+        resizeMode="cover" //'cover', 'contain', 'stretch', 'center'
       />
     );
   }
@@ -34,7 +34,7 @@ class MyFirebasePhotoView extends Component {
         path="images/firebase_logo.png"
         defaultSource={require('./assets/placeholder.png')}
         timestamp={1000} //optional, can be used to specify last modified time for same storage path
-        resizeMode="cover" //'cover', 'contain', 'stretch'
+        resizeMode="cover" //'cover', 'contain', 'stretch', 'center'
       />
     );
   }
@@ -56,9 +56,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'black',
   },
   image: {
     width: 100,
     height: 100,
+    borderRadius: 10,
   },
 });

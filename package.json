@@ -1,6 +1,6 @@
 {
   "name": "react-native-firebaseui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "React Native Firebase Bindings Based on FirebaseUI SDK",
   "main": "index.js",
   "repository": {
@@ -25,5 +25,8 @@
   "scripts": {
     "tag": "git tag \"v$npm_package_version\" && git push --tags",
     "prepublishOnly": "yarn run tag"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
   }
 }

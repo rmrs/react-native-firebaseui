@@ -1,41 +1,62 @@
 // On Android, both Image and Photo view are supported,
 // and defaultSource is converted to a uri that the
 // native side can interpret
-import React, { Component } from 'react'
-import { requireNativeComponent, Image, Platform } from 'react-native'
-import iface from './interface'
+import React, { Component } from 'react';
+import { requireNativeComponent, Image, View, StyleSheet } from 'react-native';
+import iface from './interface';
 
 const RCTFirebaseImageView = requireNativeComponent(
   'RCTFirebaseImageView',
-  iface
-)
+  iface,
+);
 const RCTFirebasePhotoView = requireNativeComponent(
   'RCTFirebasePhotoView',
-  iface
-)
+  iface,
+);
+
+const styles = StyleSheet.create({
+  imageContainer: {
+    overflow: 'hidden',
+  },
+});
 
 class ImageView extends Component {
   render() {
-    let { defaultSource, ...otherProps } = this.props
+    let {
+      source,
+      style,
+      defaultSource,
+      resizeMode,
+      ...otherProps
+    } = this.props;
     defaultSource = defaultSource
       ? Image.resolveAssetSource(defaultSource).uri
-      : undefined
+      : undefined;
+    resizeMode =
+      resizeMode || (style ? style.resizeMode : undefined) || 'cover';
     return (
-      <RCTFirebaseImageView {...otherProps} defaultSource={defaultSource} />
-    )
+      <View style={[styles.imageContainer, style]}>
+        <RCTFirebaseImageView
+          style={StyleSheet.absoluteFill}
+          defaultSource={defaultSource}
+          resizeMode={resizeMode}
+          {...otherProps}
+        />
+      </View>
+    );
   }
 }
 
 class PhotoView extends Component {
   render() {
-    let { defaultSource, ...otherProps } = this.props
+    let { defaultSource, ...otherProps } = this.props;
     defaultSource = defaultSource
       ? Image.resolveAssetSource(defaultSource).uri
-      : undefined
+      : undefined;
     return (
       <RCTFirebasePhotoView {...otherProps} defaultSource={defaultSource} />
-    )
+    );
   }
 }
 
-module.exports = { ImageView, PhotoView }
+module.exports = { ImageView, PhotoView };
