@@ -50,8 +50,11 @@ public class FirebasePhotoViewManager extends SimpleViewManager<ExtendedPhotoVie
       scaleType = ScaleType.CENTER_CROP;
     } else if ("contain".equals(resizeMode)) {
       scaleType = ScaleType.CENTER_INSIDE;
+    } else if ("stretch".equals(resizeMode)) {
+      scaleType = ScaleType.FIT_XY;
+    } else if ("center".equals(resizeMode)) {
+      scaleType = ScaleType.CENTER;
     }
-
     imageView.setScaleType(scaleType);
   }
 

@@ -1,7 +1,7 @@
-import { requireNativeComponent } from 'react-native'
-import iface from './interface'
+import { requireNativeComponent } from 'react-native';
+import iface from './interface';
 
-const ImageView = requireNativeComponent('RCTFirebaseImageView', iface)
-const PhotoView = ImageView //PhotoView is supported only on android
+const ImageView = requireNativeComponent('RCTFirebaseImageView', iface);
+const PhotoView = ImageView; //PhotoView is supported only on android
 
-module.exports = { ImageView, PhotoView }
+module.exports = { ImageView, PhotoView };

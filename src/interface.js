@@ -1,5 +1,5 @@
-import { Image } from 'react-native'
-import PropTypes from 'prop-types'
+import { Image } from 'react-native';
+import PropTypes from 'prop-types';
 
 module.exports = {
   name: 'FirebaseImage',
@@ -7,7 +7,7 @@ module.exports = {
     ...Image.propTypes,
     path: PropTypes.string,
     timestamp: PropTypes.number,
-    resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch']),
-    defaultSource: PropTypes.number
-  }
-}
+    resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch', 'center']),
+    defaultSource: PropTypes.number,
+  },
+};
